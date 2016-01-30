@@ -74,22 +74,16 @@ public class ArrowBoard extends JPanel implements ActionListener, MouseListener,
     }
     public void actionPerformed(ActionEvent e)
     {
-        for(int i=0;
-        i<br.size();
-        i++)
+        for(int i=0;i<br.size();i++)
         {
             br.get(i).move();
         }
-        for(int i=0;
-        i<am.size();
-        i++)
+        for(int i=0;i<am.size();i++)
         {
             Ammo p=am.get(i);
             p.move();
         }
-        for(int i=0;
-        i<am.size();
-        i++)
+        for(int i=0;i<am.size();i++)
         {
             Ammo p=am.get(i);
             hyp=Math.sqrt(Math.pow(0.5*p.getwidth(), 2)+Math.pow(0.5*(p.getheight()/2), 2));
@@ -102,9 +96,7 @@ public class ArrowBoard extends JPanel implements ActionListener, MouseListener,
             corner2y=corner1y-(int)(p.getwidth()*Math.sin(-1*p.dtheta));
             corner3x=corner1x+(int)(hyp*2*Math.cos(cornerangle-p.dtheta));
             corner3y=corner1y-(int)(hyp*2*Math.sin(cornerangle-p.dtheta));
-            for(int v=0;
-            v<br.size();
-            v++)
+            for(int v=0;v<br.size();v++)
             {
                 Bird a=br.get(v);
                 int corner1x2=a.getX();
@@ -189,9 +181,7 @@ public class ArrowBoard extends JPanel implements ActionListener, MouseListener,
         g2d.drawLine(x1, y1, x2, y2);
         g2d.drawImage(b.getImage(), b.getX(), b.getY(), this);
         g2d.drawImage(l.getImage(), l.getX(), l.getY(), this);
-        for(int i=0;
-        i<br.size();
-        i++)
+        for(int i=0;i<br.size();i++)
         {
             g2d.drawImage(br.get(i).getImage(), br.get(i).getX(), br.get(i).getY(), this);
         }
@@ -207,9 +197,7 @@ public class ArrowBoard extends JPanel implements ActionListener, MouseListener,
         g2d.drawOval(50, 635, 20, 20);
         g2d.setColor(Color.YELLOW);
         g2d.fillOval(50, 640,35, 35);
-        for(int i=0;
-        i<am.size();
-        i++)
+        for(int i=0;i<am.size();i++)
         {
             AffineTransform old=g2d.getTransform();
             AffineTransform neww=(AffineTransform)(old.clone());
