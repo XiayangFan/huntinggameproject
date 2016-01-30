@@ -4,14 +4,14 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.Timer;
 import java.awt.geom.*;
-public class arrowboard extends JPanel implements ActionListener, MouseListener, MouseMotionListener
+public class ArrowBoard extends JPanel implements ActionListener, MouseListener, MouseMotionListener
 {
     Timer timer;
     Head head;
-    body b;
-    leg l;
-    arm a;
-    arrow aa; 
+    Body b;
+    Leg l;
+    Arm a;
+    Bow aa; 
     int x1;
     int y1;
     int x2;
@@ -37,21 +37,21 @@ public class arrowboard extends JPanel implements ActionListener, MouseListener,
     int toolong;
     double length;
     double length2;
-    ArrayList<ammo>am; //ammo class contains physics equations to guide the projectile path across the sky
-    ArrayList<bird>br;
-    public arrowboard()
+    ArrayList<Ammo>am; //Ammo class contains physics equations to guide the projectile path across the sky
+    ArrayList<Bird>br;
+    public ArrowBoard()
     {
         setDoubleBuffered(true);
         setSize(1200, 800);
         setFocusable(true);
         setBackground(Color.BLACK);
         head=new Head();
-        b=new body();
-        l=new leg();
-        a=new arm();
-        aa=new arrow();
-        am=new ArrayList<ammo>();
-        br=new ArrayList<bird>();
+        b=new Body();
+        l=new Leg();
+        a=new Arm();
+        aa=new Bow();
+        am=new ArrayList<Ammo>();
+        br=new ArrayList<Bird>();
         toolong=0;
         timer=new Timer(5, this);
         timer.start();
@@ -61,16 +61,16 @@ public class arrowboard extends JPanel implements ActionListener, MouseListener,
     }
     public void addbirds()
     {
-        br.add(new bird(1000, 5));
-        br.add(new bird(900, 10));
-        br.add(new bird(900, 200));
-        br.add(new bird(600, 100));
-        br.add(new bird(750, 130));
-        br.add(new bird(700,6));
-        br.add(new bird(960, 100));
-        br.add(new bird(500, 55));
-        br.add(new bird(600, 130));
-        br.add(new bird(900, 455));
+        br.add(new Bird(1000, 5));
+        br.add(new Bird(900, 10));
+        br.add(new Bird(900, 200));
+        br.add(new Bird(600, 100));
+        br.add(new Bird(750, 130));
+        br.add(new Bird(700,6));
+        br.add(new Bird(960, 100));
+        br.add(new Bird(500, 55));
+        br.add(new Bird(600, 130));
+        br.add(new Bird(900, 455));
     }
     public void actionPerformed(ActionEvent e)
     {
@@ -84,19 +84,19 @@ public class arrowboard extends JPanel implements ActionListener, MouseListener,
         i<am.size();
         i++)
         {
-            ammo p=am.get(i);
+            Ammo p=am.get(i);
             p.move();
         }
         for(int i=0;
         i<am.size();
         i++)
         {
-            ammo p=am.get(i);
+            Ammo p=am.get(i);
             hyp=Math.sqrt(Math.pow(0.5*p.getwidth(), 2)+Math.pow(0.5*(p.getheight()/2), 2));
             newx=p.getX()+(p.getwidth()/2);
             newy=p.getY()+(p.getheight()/2);
             cornerangle=Math.atan((double)p.getheight()/(double)p.getwidth());
-            corner1x=newx-(int)(hyp*Math.cos(cornerangle-p.dtheta)); //lines 99 - 104 are collison detection equations between arrow and bird
+            corner1x=newx-(int)(hyp*Math.cos(cornerangle-p.dtheta)); //lines 99 - 104 are collison detection equations between Bow and Bird
             corner1y=newy+(int)(hyp*Math.sin(cornerangle-p.dtheta));
             corner2x=corner1x+(int)(p.getwidth()*Math.cos(-1*p.dtheta));
             corner2y=corner1y-(int)(p.getwidth()*Math.sin(-1*p.dtheta));
@@ -106,7 +106,7 @@ public class arrowboard extends JPanel implements ActionListener, MouseListener,
             v<br.size();
             v++)
             {
-                bird a=br.get(v);
+                Bird a=br.get(v);
                 int corner1x2=a.getX();
                 int corner1y2=a.getY();
                 int corner2x2=a.getX()+a.getwidth();
@@ -160,7 +160,7 @@ public class arrowboard extends JPanel implements ActionListener, MouseListener,
             slope=(double)deltay/(double)deltax;
         }
         theta=Math.atan(slope);
-        am.add(new ammo(a.getX(), a.getY(), theta, length));
+        am.add(new Ammo(a.getX(), a.getY(), theta, length));
         toolong=0;
     }
     public void mouseEntered(MouseEvent e)
@@ -213,7 +213,7 @@ public class arrowboard extends JPanel implements ActionListener, MouseListener,
         {
             AffineTransform old=g2d.getTransform();
             AffineTransform neww=(AffineTransform)(old.clone());
-            ammo p=am.get(i);
+            Ammo p=am.get(i);
             int Xrott=p.getX()+(p.getwidth()/2);
             int Yrott=p.getY()+(p.getheight()/2);
             neww.rotate(p.getdtheta(), Xrott, Yrott);

@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.Rectangle;
-public class Arm
+public class Bow
 {
     int x;
     int y;
@@ -11,23 +11,15 @@ public class Arm
     int dy;
     int width;
     int height;
-    int theta;
-    int dtheta;
     Image image;
-    public Arm()
+    public Bow()
     {
-        x=65;
-        y=685;
-        theta=0;
-        dtheta=0;
-        ImageIcon ii=new ImageIcon(this.getClass().getResource("arm.PNG"));
+        x=95;
+        y=675;
+        ImageIcon ii=new ImageIcon(this.getClass().getResource("bow.PNG"));
         image=ii.getImage();
         width=image.getWidth(null);
         height=image.getHeight(null);
-    }
-    public int gettheta()
-    {
-        return theta;
     }
     public int getX()
     {
